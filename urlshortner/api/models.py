@@ -9,8 +9,8 @@ class URLShortner(models.Model):
         * short_url: the shortened url
     '''
     created_date_time = models.DateTimeField()
-    times_followed = models.PositiveInteger(default=0)
-    original_url = models.URLFIELD()
+    times_followed = models.PositiveIntegerField(default=0)
+    original_url = models.URLField()
     short_url = models.CharField(max_length=15, unique=True, blank=True)
 
 
