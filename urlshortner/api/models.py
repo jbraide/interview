@@ -15,7 +15,7 @@ class URLShortner(models.Model):
 
 
     class Meta:
-        ordering = ['-created']
+        ordering = ['-created_date_time']
 
 
     def __str__(self):
