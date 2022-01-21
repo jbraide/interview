@@ -1,5 +1,8 @@
 from django.db import models
 
+# import utils
+from .utils import create_shortened_url
+
 class URLShortner(models.Model):
     '''
         Url shortner models Definition
@@ -14,9 +17,12 @@ class URLShortner(models.Model):
     short_url = models.CharField(max_length=15, unique=True, blank=True)
 
 
+
     class Meta:
         ordering = ['-created_date_time']
 
 
     def __str__(self):
         return f'shortened {self.original_url} to {self.short_url}'
+
+    

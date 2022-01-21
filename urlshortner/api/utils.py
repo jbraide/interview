@@ -28,12 +28,9 @@ def generate_random_alphanum(chars=available_characters):
 
 '''
 def create_shortened_url(model_instance):
-    random_code = create_random_code()
-    # Gets the model class
+    random_code = generate_random_alphanum()
 
-    model_class = model_instance.__class__
-
-    if model_class.objects.filter(short_url=random_code).exists():
+    if model_instance.objects.filter(short_url=random_code).exists():
         # Run the function again
         return create_shortened_url(model_instance)
 
