@@ -135,5 +135,6 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# maximum url characters for utils.py
 
 MAXIMUM_URL_CHARS = 9
