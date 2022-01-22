@@ -15,13 +15,16 @@ from .serializers import CreateShortURLSerializer
 from django.utils.timezone import now
 from .utils import create_shortened_url
 
-class CreateShortURLView(GenericAPIView):
+# exceptions
+from django.http import Http404
+
+class CreateShortURLView(APIView):
     serializer_class = CreateShortURLSerializer
 
     def get(self, request):
         serializer = self.serializer_class()
         return Response(data = {
-            'info':serializer.data,
+            'welcome_message':'Welcome to the URL shortening API, Kindly send a POST request or fill the form with a valid url (*starts with https:// or http://) to generate a short link',
             })
 
     def post(self, request, **kwargs):
@@ -48,15 +51,38 @@ class CreateShortURLView(GenericAPIView):
             working_short_url = request.build_absolute_uri('/') + shortened_url
 
             # tier's link
-            tier_mobility_link = 'https://tier.app/'+shortened_url            
+            tier_mobility_url = 'https://tier.app/'+shortened_url            
 
 
             # context
-            context['long_link'] = long_url
+            context['long_url'] = long_url
             context['short_url'] = working_short_url
-            context['tier_demo_link'] = tier_mobility_link
+            context['tier_demo_url'] = tier_mobility_url
 
             return Response(context)
         else:
             return Response(serializer.errors)
 
+class GetLongURLView(APIView):
+    def get(self, request, short_url):
+        # get the short url query
+        short_url_query = self.get_object(short_url)        
+
+        # get the long url/original url
+        long_url = short_url_query.original_url
+
+        # update the times_followed
+        times_followed = short_url_query.times_followed
+        times_followed += 1
+        URLShortner.objects.update(times_followed=times_followed)
+
+        return Response(data={
+            'long_url': long_url, 
+            'times_followed': times_followed,
+        })
+
+    def get_object(self, short_url):
+        try:
+            return URLShortner.objects.get(short_url=short_url)
+        except:
+            raise Http404('Sorry the url you\'re looking for seems broken')
