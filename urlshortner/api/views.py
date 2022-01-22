@@ -17,6 +17,7 @@ from .utils import create_shortened_url
 
 # exceptions
 from django.http import Http404
+from rest_framework.exceptions import NotFound
 
 class CreateShortURLView(APIView):
     serializer_class = CreateShortURLSerializer
@@ -64,6 +65,7 @@ class CreateShortURLView(APIView):
             return Response(serializer.errors)
 
 class GetLongURLView(APIView):
+    
     def get(self, request, short_url):
         # get the short url query
         short_url_query = self.get_object(short_url)        
@@ -82,7 +84,8 @@ class GetLongURLView(APIView):
         })
 
     def get_object(self, short_url):
+        
         try:
             return URLShortner.objects.get(short_url=short_url)
         except:
-            raise Http404('Sorry the url you\'re looking for seems broken')
+            raise NotFound(detail='Sorry the url you\'re looking for seems broken')
