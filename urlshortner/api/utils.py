@@ -8,7 +8,7 @@ from string import ascii_letters, digits
 
 
 # define the size of the alphanumeric char 
-size_of_code = getattr(settings, 'MAXIMUM_URL_CHARS', 13)
+size_of_code = getattr(settings, 'MAXIMUM_URL_CHARS', 7)
 
 # characters and digits
 available_characters = ascii_letters + digits
