@@ -25,3 +25,21 @@ Running the Django Server
 ```
 
 ## Available Endpoints
+
+The root for the application lives at 
+
+```sh
+    https://tier-interview.herokuapp.com
+```
+
+To create a new short Url
+
+* paste or type the link in the form field at the above url 
+
+> OR 
+
+* use curl in the terminal to generate a new short url 
+
+```sh
+curl -d '{"original_url":"type your url starting with https:// or http://"}' -H 'Content-Type: application/json' https://tier-interview.herokuapp.com
+```
