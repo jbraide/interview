@@ -56,7 +56,7 @@ class CreateShortURLView(APIView):
 
 
             # context
-            context['long_url'] = long_url
+            context['message'] = 'congrats your short link has been created'
             context['short_url'] = working_short_url
             context['tier_demo_url'] = tier_mobility_url
 
