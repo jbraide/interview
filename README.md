@@ -12,7 +12,7 @@ Project requirements
 
 Running the Django Server
 
-* activate the virtualenvironment and enter into the project folder
+* activate the virtual environment for linux/unix and enter into the project folder
 
 ```sh 
     source venv/bin/activate && cd urlshortner
@@ -42,4 +42,14 @@ To create a new short Url
 
 ```sh
 curl -d '{"original_url":"type your url starting with https:// or http://"}' -H 'Content-Type: application/json' https://tier-interview.herokuapp.com
+```
+
+To Access the short url that you have created, the response should produce a url you can click on or copy and 
+
+- Access on the browser 
+> OR
+- Use curl in the terminal to view the long url and times the link had been visited.
+
+```sh 
+    curl -X GET  http://tier-interview.herokuapp.com/FDft83h/
 ```
